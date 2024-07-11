@@ -4,12 +4,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./auth/HomeScreen";
 import SignUpScreen from "./screens/SignUp";
 import SignInScreen from "./screens/SignIn";
+import MaintananceScreen from "./auth/MaintananceScreen";
+import EventManagement from "./auth/EventManagementScreen";
+import VisitorAccess from "./auth/VisitorAccessScreen";
+import FireAlarm from "./auth/FireAlarmScreen";
 import profile from "./auth/Profile";
 import { useState } from "react";
 import PwReset from "./screens/Reset";
 import { NavigationContainer } from "@react-navigation/native";
 import {ClerkProvider, useAuth} from '@clerk/clerk-expo';
 import * as SecureStore from 'expo-secure-store';
+
 const Stack = createStackNavigator();
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -24,22 +29,14 @@ const tokenCache = {
 };
 
 const AppStack = () => {
-  const goToDetails = () => {
-    navigation.navigate('profile');
-  };
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home Screen" component={HomeScreen} options={{
-        headerRight: () => (
-          <Button
-          onPress={goToDetails}
-            title="Profile"
-            color="#000"
-          />
-        ),
-       
-      }}/>
+      <Stack.Screen name="Home Screen" component={HomeScreen}/>
+      <Stack.Screen name="Maintanance" component={MaintananceScreen} />
+      <Stack.Screen name="Event Management" component={EventManagement} />
+      <Stack.Screen name="Visitor Access" component={VisitorAccess} />
        <Stack.Screen name="profile" options={{presentation:'modal'}} component={profile}/>
+       <Stack.Screen name="Fire Alarm" component={FireAlarm} />
     </Stack.Navigator>
   );
 };
